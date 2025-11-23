@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-// === БАЗОВИЙ КЛАС ===
 public abstract class MusicItem : ICloneable, IComparable<MusicItem>
 {
     public string Title { get; set; }
-    public int Duration { get; set; } // у секундах
+    public int Duration { get; set; } 
     public double Rating { get; set; }
 
     public MusicItem(string title, int duration, double rating)
@@ -61,7 +60,6 @@ public class Podcast : MusicItem
         $"Podcast: {base.ToString()} | Host: {Host}";
 }
 
-// === КОЛЕКЦІЯ З ПОДІЯМИ ТА ІТЕРАТОРОМ ===
 public class MusicLibrary
 {
     public List<MusicItem> Items = new List<MusicItem>();
@@ -81,7 +79,6 @@ public class MusicLibrary
         ItemRemoved?.Invoke(item);
     }
 
-    // === ВЛАСНИЙ ІТЕРАТОР (лише елементи з рейтингом вище заданого) ===
     public IEnumerable<MusicItem> GetHighRated(double minRating)
     {
         foreach (var item in Items)
@@ -92,7 +89,6 @@ public class MusicLibrary
     }
 }
 
-// === ГОЛОВНА ПРОГРАМА (ДЕМОНСТРАЦІЯ) ===
 class Program
 {
     static void Main()
@@ -111,7 +107,6 @@ class Program
         foreach (var item in lib.GetHighRated(9))
             Console.WriteLine(item);
 
-        // === LINQ ЗАПИТИ ===
 
         Console.WriteLine("\n📌 LINQ: усі пісні відсортовані за тривалістю:");
         var sortedSongs = lib.Items
